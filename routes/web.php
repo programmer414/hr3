@@ -179,6 +179,11 @@ Route::post('/user_account', [App\Http\Controllers\UseraccountController::class,
 Route::get('/time/and/attendance', [App\Http\Controllers\timeandattendance::class, 'index'])->name('time-and-attendance');
 
 
+Route::get('/testing', [App\Http\Controllers\testingController::class, 'index'])->name('testing-view');
+
+
+
+
 });
 
 
