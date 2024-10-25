@@ -1,0 +1,55 @@
+{
+  "menu": [
+    {
+       "url": "dashboard/crm",
+      "name": "Dashboards",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "dashboard-crm",
+      "badge": [
+        "primary",
+        ""
+      ]
+    },
+    
+    {
+      "url": "time/and/attendance",
+      "name": "TIME AND ATTENDANCE",
+      "icon": "menu-icon tf-icons ti ti-clock",
+      "slug": "time-and-attendance"
+    },
+    {
+      "url": "app/chat",
+      "name": "TIMESHEET MANAGEMENT",
+      "icon": "menu-icon tf-icons ti ti-file",
+      "slug": "app-chat"
+    },
+    {
+      "url": "app/calendar",
+      "name": "CLAIMS AND REIMBURSEMENT",
+      "icon": "menu-icon tf-icons ti ti-file",
+      "slug": "app-calendar"
+    },
+    {
+      "url": "app/kanban",
+      "name": "LEAVE MANAGEMENT",
+      "icon": "menu-icon tf-icons ti ti-layout-kanban",
+      "slug": "app-kanban"
+    },
+  {
+      "url": "app/invoice/add",
+      "name": "SHIFT AND SCHEDULING",
+      "icon": "menu-icon tf-icons ti ti-calendar",
+      "slug": "app-invoice-add"
+    },
+      {
+      "url": "user/account",
+      "name": "User Account",
+      "icon": "menu-icon tf-icons ti ti-user ",
+      "slug": "user-account"
+    }
+
+    
+
+    
+  ]
+}
