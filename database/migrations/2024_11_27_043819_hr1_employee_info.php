@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-
-       Schema::create('hr1_employee_info', function (Blueprint $table) {
+             Schema::create('hr1_employee_info', function (Blueprint $table) {
          $table->id('employee_id');
          $table->string('employee_name')->nullable();
          $table->string('generate_code')->nullable();
 
          $table->timestamps();
-  //
-     });
 
+          });
 
-   }
+    }
 
     /**
      * Reverse the migrations.

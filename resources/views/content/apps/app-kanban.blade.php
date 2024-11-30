@@ -200,6 +200,7 @@
          <div class="form-group">
           <select class="form-select" id="leave_type_update" name="leave_type_update">
             <option>Annaul Leave</option>
+             <option>Vacation</option>
             <option>Sick Leave</option>
             <option>Maternity Leave</option>
             <option>Peternity Leave</option>
@@ -217,6 +218,17 @@
        <div class="form-group">
          <input type="date" id="end_date_update"  name="end_date_update" class="form-control">
        </div>
+    <label>LEAVE TYPE</label>
+         <div class="form-group">
+          <select class="form-select" id="status" name="status">
+            <option>Approved</option>
+            <option>Cancel</option>
+                <option>Pending</option>
+
+          </select>
+        </div>
+
+
      </div>
      <div class="modal-footer">
       <button type="submit" class="btn btn-primary">Save</button>
@@ -248,6 +260,9 @@
     $('#employee_id').val(tr.eq(1).text());
    $('#employee_ids').val(tr.eq(1).text());
     $('#employee_name_update').val(tr.eq(2).text());
+            var  f=tr.eq(6).text();
+        $('#status').val(f.trim()).change();
+
     $('#leave_type_update').val(tr.eq(3).text());
     $('#start_date_update').val(tr.eq(4).text());
     $('#end_date_update').val(tr.eq(5).text());

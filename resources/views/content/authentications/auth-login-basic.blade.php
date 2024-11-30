@@ -39,12 +39,14 @@ $customizerHidden = 'customizer-hide';
       <div class="card">
         <div class="card-body">
           <!-- Logo -->
-          <div class="app-brand justify-content-center mb-4 mt-2">
-            <a href="{{url('/')}}" class="app-brand-link gap-2">
-              <span class="app-brand-logo demo">@include('_partials.macros',["height"=>20,"withbg"=>'fill: #fff;'])</span>
-              <span class="app-brand-text demo text-body fw-bold ms-1">GERSON PUZON</span>
-            </a>
-          </div>
+          <div class="justify-content-center" style="">
+               <img src="{{ asset('assets/img/icons.jpg') }}" style="display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:30%;">
+  </div>
+      <p class="app-brand-text demo text-body fw-bold ms-1" style="text-align:center;">LOGIN</p>
+          
           <!-- /Logo -->
           <form  action="{{url('/')}}" id="formAuthentication" class="mb-3" method="Post">
             @csrf

@@ -66,7 +66,7 @@
          <th>Claim Date</th>
          <th>Claim Type</th>
          <th>Amount</th>
-         <th>Status</th>
+         <th>Action</th>
        </tr>
      </thead>
      <tbody>
@@ -78,10 +78,9 @@
         <td>{{ $claim->claim_type }}</td>
         <td>{{ $claim->amount }}</td>
         <td style="display:flex;">
-          <button class="btn btn-primary" style="height:38px;"><a href="{{ route('claims.edit', ['id' => $claim->id]) }}" style="color:white;"> Edit </a></button>
+          <button class="btn btn-primary mr-2" style="height:38px;"><a href="{{ route('claims.edit', ['id' => $claim->id]) }}" style="color:white;"> Edit </a></button>
 
-
-          <form method="POST" action="{{ route('claims.delete', ['id' => $claim->id]) }}" >
+          <form method="POST" action="{{ route('claims.delete', ['id' => $claim->id]) }}"  style="margin-left:1%;">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">Delete</button>

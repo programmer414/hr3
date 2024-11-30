@@ -181,6 +181,15 @@ Route::get('/time/and/attendance', [App\Http\Controllers\timeandattendance::clas
 
 Route::get('/testing', [App\Http\Controllers\testingController::class, 'index'])->name('testing-view');
 
+Route::post('/storeImage', [UserProfile::class,'storeImage'])->name('storeImage');
+Route::post('/userupdate', [UserProfile::class,'update'])->name('userupdate');
+
+
+
+Route::post('/deleted', [App\Http\Controllers\UseraccountController::class,'destroy'])->name('destroy');
+
+
+Route::post('/updateuser', [App\Http\Controllers\UseraccountController::class,'update'])->name('update');
 
 
 
@@ -195,9 +204,9 @@ Route::get('/', [LoginBasic::class, 'index'])->name('auth-login-basic');
 Route::get('/login', [LoginBasic::class, 'index'])->name('login');
 Route::post('/', [LoginBasic::class,'loginpost'])->name('auth-login-basic');
 
-Route::get('/auth/logi/basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
+Route::get('/auth/login/basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
 
-Route::get('/auth/logi/basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
+Route::get('/auth/login/basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
 Route::get('/dashboard/crm', [Crm::class, 'index'])->name('dashboard-crm');
 // locale
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);

@@ -4,6 +4,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"> <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @extends('layouts/layoutMaster')
 
 @section('title', 'USER ACCOUNT')
@@ -43,7 +46,22 @@
 
 @section('content')
   
+<style type="text/css">
+  
+  .modal-backdrop {
+      /* bug fix - no overlay */    
+      display: none;    
+    }
 
+    .modal{
+      /* bug fix - custom overlay */   
+      background-color: rgba(10,10,10,0.45);
+    }
+
+  </style>
+
+  
+</style>
 
   <div class="">
     <div class="card">
@@ -72,6 +90,7 @@
               <th>Role</th>
               <th>Date Created</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -81,10 +100,18 @@
                 <tr class="contents">
                     <td>{{ $claim->id }}</td>
                     <td class="titles">{{ $claim->name }}</td>
-                    <td>{{ $claim->email }}</td>
-                    <td>Admin</td>
-                      <td>{{ $claim->created_at }}</td>
-<td>Active</td>
+                    <td class="titles">{{ $claim->email }}</td>
+                    <td>{{ $claim->role}}</td>
+                    <td>{{ $claim->created_at }}</td>
+                    <td>{{$claim->status}}</td>
+                    <td>
+                    <form  action="{{url('/deleted')}}"  class="mb-3" method="POST">
+                          @METHOD('POST')
+                           @csrf
+                           <input type="hidden" name="user_id" value="{{ $claim->id }}">
+                      <button  type="submit" class="btn  btn-danger btn-sm btn-flat">Delete</button>
+                          </form>
+                       <button class="btn  btn-primary btn-flat btn-sm" id="openmodal">Update</button></td>
 
                 </tr>
               @endforeach
@@ -118,14 +145,20 @@
    <div class="form-group">
      <input type="text" name="password" class="form-control">
    </div>
-   <div class="form-group" style="display:none;">
-     <input type="text" name="role" value="admin" class="form-control">
+
+          <label>USER ROLE</label>
+   <div class="form-group">
+   <select class="form-control" name="role">
+     <option>Admin</option>
+       <option>Hr Staff</option>
+   </select>
    </div>
+
 
       </div>
       <div class="modal-footer">
         <button type="SUBMIT" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+        <button type="button" class="btn btn-secondary" id="closemodal" >Close</button>
       </div>
     </div>
 
@@ -135,21 +168,98 @@
 </div>
   
 
+
+<div class="modal" tabindex="-1" role="dialog" id="updatemodal">
+  <div class="modal-dialog" role="document">
+    <form  action="{{url('/updateuser')}}" id="formAuthentication" class="mb-3" method="POST">
+      @csrf
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">UPDATE ACCOUNT</h5>
+ 
+      </div>
+      <div class="modal-body">
+        <label>FULL NAME</label>
+   <div class="form-group">
+     <input type="hidden" name="userid" id="userid" class="form-control">
+     <input type="text" name="fullname" id="fullname" class="form-control">
+   </div>
+          <label>EMAIL</label>
+   <div class="form-group">
+     <input type="email" name="emailupdate" id="emailupdate" class="form-control">
+   </div>
+  
+
+          <label>USER ROLE</label>
+   <div class="form-group">
+   <select class="form-control" name="roleupdate" id="roleupdate">
+          <option>Hr Staff</option>
+     <option>Admin</option>
+ 
+   </select>
+   </div>
+
+
+            <label>STATUS</label>
+   <div class="form-group">
+   <select class="form-control" name="statusupdate" id="statusupdate">
+     <option>Inactive</option>
+       <option>Active</option>
+   </select>
+   </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="SUBMIT" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" id="closemodalupdate" >Close</button>
+      </div>
+    </div>
+
+    <!-- @END -->
+  </form>
+  </div>
+</div>
+
+
+
+
 @endsection
+
+
+<script >
+  $(document).on('click', '#closemodal', function () {
+   $('#smallModal').hide();
+
+  });
+
+    $(document).on('click', '#openmodal', function () {
+   $('#updatemodal').show();
+
+     $('#update_date').modal('show');
+    $('form')[0].reset();
+    var tr = $(this).closest("tr").find('td');
+    $('#roleupdate').val(tr.eq(3).text());
+   $('#fullname').val(tr.eq(1).text());
+    $('#emailupdate').val(tr.eq(2).text());
+      $('#statusupdate').val(tr.eq(5).text());
+       $('#userid').val(tr.eq(0).text());
+  });
+
+      $(document).on('click', '#closemodalupdate', function () {
+     $('#updatemodal').hide();
+
+  });
+
+
+</script>
 
 <script type="text/javascript">
 
 
-  $(document).ready(function(){
-
-   $('#closemodal').on('hidden.bs.modal', function (e) {
- $('#smallModal').hide();
-});
-
-    
-
-  });
-
+  
+$(document).ready(function(){
 
       $('#myInput').keyup(function(){
 // Search text
@@ -161,6 +271,8 @@
       $('.contents .titles:contains("'+text+'")').closest('.contents').show();
     });
 
+
+});
 
 
 </script>
