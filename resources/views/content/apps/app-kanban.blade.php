@@ -128,11 +128,13 @@
          <label>LEAVE TYPE</label>
          <div class="form-group">
           <select class="form-select" name="leave_type">
-           <option>Annaul Leave</option>
-           <option>Sick Leave</option>
-           <option>Maternity Leave</option>
-           <option>Peternity Leave</option>
-           <option>Personal Leave</option>
+          <option>Annaul Leave</option>
+             <option>Vacation Leave</option>
+            <option>Sick Leave</option>
+            <option>Maternity Leave</option>
+            <option>Peternity Leave</option>
+            <option>Personal Leave</option>
+            <option>Emergency Leave</option>
          </select>
        </div>
 
@@ -200,11 +202,12 @@
          <div class="form-group">
           <select class="form-select" id="leave_type_update" name="leave_type_update">
             <option>Annaul Leave</option>
-             <option>Vacation</option>
+             <option>Vacation Leave</option>
             <option>Sick Leave</option>
             <option>Maternity Leave</option>
             <option>Peternity Leave</option>
             <option>Personal Leave</option>
+            <option>Emergency Leave</option>
           </select>
         </div>
 

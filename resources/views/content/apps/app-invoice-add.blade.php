@@ -119,8 +119,12 @@
          <div class="form-group">
           <select class="form-select" name="shift_type">
            <option>Day Shift</option>
+          <option>Morning Shift</option>
+             <option>Afternoon Shift</option>
+               <option>Night Shift</option>
            <option>Graveyard Shift</option>
-           <option>Night Shift</option>
+         
+
          </select>
        </div>
      </div>
@@ -168,7 +172,11 @@
          <label>SHIFT TYPE</label>
          <div class="form-group">
           <select class="form-select"  id="shift_type_update" name="shift_type_update">
-           <option>Day Shift</option>
+             <option>Day Shift</option>
+          <option>Morning Shift</option>
+             <option>Afternoon Shift</option>
+               <option>Night Shift</option>
+           <option>Graveyard Shift</option>
          </select>
        </div>
      </div>

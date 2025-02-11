@@ -75,6 +75,13 @@
           <label>CLAIM TYPE</label>
    <div class="form-group">
      <input value="{{ $claim->claim_type }}" type="text" name="employee_type" class="form-control">
+     <option class="form-control">Travel Expenses</option>
+   <option class="form-control">Transportation Allowance</option>
+   <option class="form-control">Meal Allowance</option>
+   <option class="form-control">Performance-based Bonus</option>
+   <option class="form-control">Health Insurance</option>
+   <option class="form-control">Leave Benefit</option>
+    <option class="form-control">13 month pay</option>
    </div>
 
        <label>AMOUNT</label>
