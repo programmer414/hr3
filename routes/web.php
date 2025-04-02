@@ -162,12 +162,15 @@ Route::get('/app/chat', [Chat::class, 'index'])->name('app-chat');
 Route::post('/logout', [App\Http\Controllers\LogoutController::class, 'logout'])->name('logout');
 Route::get('/app/calendar', [Calendar::class, 'index'])->name('app-calendar');
 Route::post('/claims', [App\Http\Controllers\ClaimController::class, 'store'])->name('claims.store');
-Route::get('/claims/{id}', [App\Http\Controllers\ClaimController::class, 'edit'])->name('claims.edit');
-Route::put('/claims/{id}', [App\Http\Controllers\ClaimController::class, 'update'])->name('claims.update');
+
+Route::post('/update', [App\Http\Controllers\ClaimController::class, 'update'])->name('claims.update');
+
 Route::delete('/claims/{id}', [App\Http\Controllers\ClaimController::class, 'destroy'])->name('claims.delete');
-Route::post('/Leave', [App\Http\Controllers\LeaveController::class,'store'])->name('Leave.store');
-Route::post('/Leaveupdate', [App\Http\Controllers\LeaveController::class,'Leaveupdate'])->name('Leaveupdate.Leaveupdate');
-Route::delete('/Leave/{id}', [App\Http\Controllers\LeaveController::class, 'destroy'])->name('Leave.delete');
+Route::post('/Leave', [App\Http\Controllers\Leavecontroller::class,'store'])->name('Leave.store');
+
+Route::post('/Leaveupdate', [App\Http\Controllers\Leavecontroller::class,'Leaveupdate'])->name('Leaveupdate.Leaveupdate');
+
+Route::delete('/Leave/{id}', [App\Http\Controllers\Leavecontroller::class, 'destroy'])->name('Leave.delete');
 Route::get('/app/kanban', [Kanban::class, 'index'])->name('app-kanban');
 Route::post('/Shift_and_schedule', [App\Http\Controllers\ShiftandschedulingController::class,'store'])->name('Shift_and_schedule.store');
 	Route::delete('/Shift_and_schedule/{id}', [App\Http\Controllers\ShiftandschedulingController::class, 'destroy'])->name('Shift_and_schedule.delete');
@@ -192,6 +195,10 @@ Route::post('/deleted', [App\Http\Controllers\UseraccountController::class,'dest
 Route::post('/updateuser', [App\Http\Controllers\UseraccountController::class,'update'])->name('update');
 
 
+
+Route::get('employee/view', [App\Http\Controllers\qrcodeController::class, 'index'])->name('employee-view');
+
+Route::post('qrcodesave', [App\Http\Controllers\qrcodeController::class, 'store'])->name('store');
 
 });
 

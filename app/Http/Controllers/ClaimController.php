@@ -17,7 +17,6 @@ class ClaimController extends Controller
 
         Claim::create([
             'employee_id' => $request->employee_id,
-            'employee_name' => $request->employee_name,
             'claim_date' => $request->claim_date,
             'claim_type' => $request->employee_type,
             'amount' => $request->amount,
@@ -26,36 +25,24 @@ class ClaimController extends Controller
         return back();
     }
 
-    public function edit($id){
 
-        // $claim = Claim::where('id',$id)->first();
-        $claim = Claim::find($id);
-
-        if(!$claim){
-            return abort(404);
-        }
-
-       return view('content.pages.claims-edit', ['claim' => $claim]);
-
-    }
 
     // create | page create
 
 
     // update | update
-    public function update($id, Request $request){
-        $claim = Claim::find($id);
-
+    public function update(Request $request){
+        $id=$request->claim_id_update;
+        $claim = Claim::where('id',$id)->first();
         if(!$claim){
             return abort(404);
         }
 
         $claim->update([
-            'employee_id' => $request->employee_id,
-            'employee_name' => $request->employee_name,
-            'claim_date' => $request->claim_date,
-            'claim_type' => $request->employee_type,
-            'amount' => $request->amount,
+            'employee_id' => $request->employee_id_update,
+            'claim_date' => $request->claim_date_update,
+            'claim_type' => $request->employee_type_update,
+            'amount' => $request->amount_update,
         ]);
 
         return back();

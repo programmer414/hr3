@@ -10,6 +10,12 @@
         ""
       ]
     },
+      {
+      "url": "employee/view",
+      "name": "EMPLOYEE GENERATE QR",
+      "icon": "menu-icon tf-icons ti ti-clock",
+      "slug": "employee-view"
+    },
     
     {
       "url": "time/and/attendance",

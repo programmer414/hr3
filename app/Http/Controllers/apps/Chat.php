@@ -13,9 +13,7 @@ class Chat extends Controller
       public function index()
   {
 
-      $timesheet = DB::table('hr3_attendance')
-            ->leftJoin('hr1_employee_info', 'hr1_employee_info.employee_id', '=', 'hr3_attendance.employee_id')
-            ->get();
+      $timesheet = DB::select("SELECT * FROM `hr3_attendance` inner  join  hr1_applicant on  hr1_applicant.applicant_id=hr3_attendance.employee_id");
       return view('content.apps.app-chat',['timesheet' => $timesheet]);
   }
 

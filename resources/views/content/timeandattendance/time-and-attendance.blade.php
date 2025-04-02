@@ -52,7 +52,7 @@
         @foreach($attendance as $claim)
         <tr class="contents">
           <td>{{$claim->employee_id}}</td>
-          <td class="titles">{{ $claim->employee_name }}</td>
+          <td class="titles">{{ $claim->firstname}}</td>
           <td>{{ $claim->time_in }}</td>
           <td>{{ $claim->time_out}}</td>
           <td>

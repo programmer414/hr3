@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('claims', function (Blueprint $table) {
             $table->id();
             $table->string('employee_id')->nullable();
-            $table->string('employee_name')->nullable();
             $table->date('claim_date')->nullable();
             $table->string('claim_type')->nullable();
             $table->double('amount');

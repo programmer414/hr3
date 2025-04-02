@@ -15,6 +15,7 @@ class Claim extends Model
         'claim_date',
         'claim_type',
         'amount',
+        'id',
         
     ];
 
