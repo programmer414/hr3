@@ -24,28 +24,28 @@
       "slug": "time-and-attendance"
     },
     {
-      "url": "app/chat",
+      "url": "timesheet/management/view",
       "name": "TIMESHEET MANAGEMENT",
       "icon": "menu-icon tf-icons ti ti-file",
-      "slug": "app-chat"
+      "slug": "timesheet-management-view"
     },
     {
-      "url": "app/calendar",
+      "url": "claim/view",
       "name": "CLAIMS AND REIMBURSEMENT",
       "icon": "menu-icon tf-icons ti ti-file",
-      "slug": "app-calendar"
+      "slug": "claim-view"
     },
     {
-      "url": "app/kanban",
+      "url": "leave/view",
       "name": "LEAVE MANAGEMENT",
       "icon": "menu-icon tf-icons ti ti-layout-kanban",
       "slug": "app-kanban"
     },
   {
-      "url": "app/invoice/add",
+      "url": "shift/and/schedule/view",
       "name": "SHIFT AND SCHEDULING",
       "icon": "menu-icon tf-icons ti ti-calendar",
-      "slug": "app-invoice-add"
+      "slug": "shift-and-scheule-view"
     },
       {
       "url": "user/account",

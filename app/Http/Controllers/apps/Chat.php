@@ -14,7 +14,7 @@ class Chat extends Controller
   {
 
       $timesheet = DB::select("SELECT * FROM `hr3_attendance` inner  join  hr1_applicant on  hr1_applicant.applicant_id=hr3_attendance.employee_id");
-      return view('content.apps.app-chat',['timesheet' => $timesheet]);
+      return view('content.apps.timesheet-management-view',['timesheet' => $timesheet]);
   }
 
 }

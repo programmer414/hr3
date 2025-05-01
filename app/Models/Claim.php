@@ -16,6 +16,7 @@ class Claim extends Model
         'claim_type',
         'amount',
         'id',
+         'status',
         
     ];
 

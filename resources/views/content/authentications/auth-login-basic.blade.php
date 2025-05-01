@@ -1,3 +1,5 @@
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"> <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @php
 $customizerHidden = 'customizer-hide';
 @endphp
@@ -89,4 +91,41 @@ $customizerHidden = 'customizer-hide';
     </div>
   </div>
 </div>
+
 @endsection
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+@if(session()->has('error'))
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "{{ session('error') }}",
+        });
+    });
+</script>
+@endif
+
+
+
+@if(session()->has('success'))
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Welcome!',
+            text: "{{ session('success') }}",
+            timer: 3000,
+            showConfirmButton: false
+        });
+    });
+</script>
+@endif
+
+

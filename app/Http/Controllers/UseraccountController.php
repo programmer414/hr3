@@ -15,21 +15,26 @@ class UseraccountController extends Controller
     return view('content.pages.user-account', ['user_account' => $user_account]);
   }
 
+public function store(Request $request)
+{
+    // Check if the email exists
+    $existingUser = User::where('email', $request->email)->first();
 
-  public function store(Request $request)
-  {
+    if ($existingUser) {
+        return redirect()->back()->with('alert', 'This email is already registered');
+    } else {
+        // Securely create a new user with hashed password
+        User::create([
+            'name' => $request->name,
+            'password' =>$request->password, // Encrypt password
+            'email' => $request->email,
+            'status' => 'Active',
+            'role' => 'admin',
+        ]);
 
-    User::create([
-      'name' => $request->name,
-      'password' => $request->password,
-      'email' => $request->email,
-      'status'=>'Active'
-    ]);
-
-    return back();
-
-  }
-
+        return redirect()->back()->with('success', 'SUCCESS REGISTER');
+    }
+}
 
   public function destroy(Request $request)
   {

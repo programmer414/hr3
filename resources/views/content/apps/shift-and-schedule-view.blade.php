@@ -69,8 +69,7 @@
             <button class="btn btn-primary" style="height:38px;" id="updatebutton">Update</button>
 
             <form method="POST" action="{{ route('Shift_and_schedule.delete', ['id' => $claim->id]) }}"  style="margin-left:2%;">
-              @csrf
-              @method('DELETE')
+             
               <button type="submit" class="btn btn-danger">Delete</button>
             </form>
 
@@ -262,8 +261,8 @@ mysqli_select_db($conn,"$db_name")or die("cannot select DB");
   $(document).on('click', '#add', function () {
        $('form')[0].reset();
        var tr = $(this).closest("tr").find('td');
-       $('#employee_id').val(tr.eq(1).text());
-        $('#employee_ids').val(tr.eq(1).text());
+       $('#employee_id').val(tr.eq(0).text());
+        $('#employee_ids').val(tr.eq(0).text());
        $('#employee_name').val(tr.eq(2).text());
    });
 

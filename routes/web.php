@@ -158,20 +158,27 @@ use App\Http\Controllers\maps\Leaflet;
 
 Route::middleware('auth')->group(function(){
 
-Route::get('/app/chat', [Chat::class, 'index'])->name('app-chat');
+Route::get('/timesheet/management/view', [Chat::class, 'index'])->name('timesheet-management-view');
+
+
 Route::post('/logout', [App\Http\Controllers\LogoutController::class, 'logout'])->name('logout');
-Route::get('/app/calendar', [Calendar::class, 'index'])->name('app-calendar');
+Route::get('/claim/view', [Calendar::class, 'index'])->name('claim-view');
+
 Route::post('/claims', [App\Http\Controllers\ClaimController::class, 'store'])->name('claims.store');
 
-Route::post('/update', [App\Http\Controllers\ClaimController::class, 'update'])->name('claims.update');
+Route::post('/claims/updated/{id}', [App\Http\Controllers\ClaimController::class, 'updated'])->name('claims.updated');
+Route::post('/claims/{id}', [App\Http\Controllers\ClaimController::class, 'destroy'])->name('claims.delete');
 
-Route::delete('/claims/{id}', [App\Http\Controllers\ClaimController::class, 'destroy'])->name('claims.delete');
+
 Route::post('/Leave', [App\Http\Controllers\Leavecontroller::class,'store'])->name('Leave.store');
 
-Route::post('/Leaveupdate', [App\Http\Controllers\Leavecontroller::class,'Leaveupdate'])->name('Leaveupdate.Leaveupdate');
 
-Route::delete('/Leave/{id}', [App\Http\Controllers\Leavecontroller::class, 'destroy'])->name('Leave.delete');
-Route::get('/app/kanban', [Kanban::class, 'index'])->name('app-kanban');
+Route::post('/Leaveupdates/{id}', [App\Http\Controllers\Leavecontroller::class,'Leaveupdate'])->name('Leaveupdate');
+
+Route::post('/Leave/{id}', [App\Http\Controllers\Leavecontroller::class, 'destroy'])->name('Leave.delete');
+
+Route::get('/leave/view', [Kanban::class, 'index'])->name('leave-view');
+
 Route::post('/Shift_and_schedule', [App\Http\Controllers\ShiftandschedulingController::class,'store'])->name('Shift_and_schedule.store');
 	Route::delete('/Shift_and_schedule/{id}', [App\Http\Controllers\ShiftandschedulingController::class, 'destroy'])->name('Shift_and_schedule.delete');
 Route::post('/Shift_and_schedules', [App\Http\Controllers\ShiftandschedulingController::class,'update'])->name('Shift_and_schedules.update');
@@ -290,7 +297,8 @@ Route::get('/app/invoice/list', [InvoiceList::class, 'index'])->name('app-invoic
 Route::get('/app/invoice/preview', [InvoicePreview::class, 'index'])->name('app-invoice-preview');
 Route::get('/app/invoice/print', [InvoicePrint::class, 'index'])->name('app-invoice-print');
 Route::get('/app/invoice/edit', [InvoiceEdit::class, 'index'])->name('app-invoice-edit');
-Route::get('/app/invoice/add', [InvoiceAdd::class, 'index'])->name('app-invoice-add');
+Route::get('/shift/and/schedule/view', [InvoiceAdd::class, 'index'])->name('shift-and-schedule-view');
+
 Route::get('/app/user/list', [UserList::class, 'index'])->name('app-user-list');
 Route::get('/app/user/view/account', [UserViewAccount::class, 'index'])->name('app-user-view-account');
 Route::get('/app/user/view/security', [UserViewSecurity::class, 'index'])->name('app-user-view-security');

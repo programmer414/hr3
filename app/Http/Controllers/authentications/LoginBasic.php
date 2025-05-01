@@ -18,34 +18,20 @@ class LoginBasic extends Controller
         return view('content.authentications.auth-login-basic', ['pageConfigs' => $pageConfigs]);
     }
 
-public function loginpost(Request $request){
 
-// dd('test post', $request->all());
+public function loginpost(Request $request) {
+    $user = User::where('email', $request->email)->first();
+    if (!$user) {
+        return redirect()->back()->with('error', 'User not found');
+      }
+    if (!Hash::check($request->password, $user->password)) {
+        return redirect()->back()->with('error', 'Incorrect credentials');
+      }
 
-  $user = User::where('email', $request->email)->first();
+    Auth::login($user);
+    return redirect('/dashboard/crm')->with('success', 'Login successful!');
+    }
 
-  // dd($user);
-
-  if(!$user){
-
-    // TODO:
-    return back()->with('error', 'user not found');
-  }
-
-
-
-  if(!Hash::check($request->password, $user->password)){
-    return back()->with('error', 'incorrect credential');
-  }
-
-
-
-  Auth::login($user);
-
-
-  return redirect('/dashboard/crm');
-
-}
 }
 
 

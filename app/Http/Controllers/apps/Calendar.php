@@ -12,9 +12,9 @@ class Calendar extends Controller
   public function index(Request $request)
   {
 
-    $claims =DB::select("SELECT * FROM `claims` INNER JOIN hr1_applicant on hr1_applicant.applicant_id=claims.employee_id");
+    $claims =DB::select("SELECT *,claims.status as  st FROM `claims` INNER JOIN hr1_applicant on hr1_applicant.applicant_id=claims.employee_id");
 
-    return view('content.apps.app-calendar', ['claims' => $claims]);
+    return view('content.apps.claim-view', ['claims' => $claims]);
     // return view('content.apps.app-calendar', compact('claims'));
   }
 }

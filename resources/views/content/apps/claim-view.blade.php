@@ -66,6 +66,7 @@
          <th>Claim Date</th>
          <th>Claim Type</th>
          <th>Amount</th>
+         <th>Status</th>
          <th>Action</th>
        </tr>
      </thead>
@@ -76,18 +77,21 @@
         <td class="titles">{{ $claim->firstname}} {{ $claim->lastname}}</td>
         <td>{{ $claim->claim_date }}</td>
         <td>{{ $claim->claim_type }}</td>
-        <td>{{ $claim->amount }}</td>
+        <td>₱<?php $s=$claim->amount;echo number_format($s, 2)?></td>
         <td style="display:none;">{{ $claim->id }}</td>
+        <td style="display:none;">{{ $claim->amount }}</td>
+        <td>{{ $claim->st }}</td>
         <td style="display:flex;">
-          <button class="btn btn-primary mr-2" style="height:38px;" id="updateclick"> Edit</button>
-
-          <form method="POST" action="{{ route('claims.delete', ['id' => $claim->id]) }}"  style="margin-left:1%;">
+  <form  action="{{url('claims/updated',['id' =>$claim->id])}}" method="POST">
+      @csrf
+            @method('POST')
+          <button type="submit" class="btn btn-primary btn-sm  btn-flat mr-2" style="" >APPROVED</button>
+  </form>
+          <form method="POST" action="{{ route('claims.delete', ['id' => $claim->id]) }}"  style="margin-left:1%;" class="btn-flat btn-sm">
             @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger">Delete</button>
+            @method('POST')
+            <button type="submit" class="btn btn-danger btn-sm btn-flat">DECLINE</button>
           </form>
-
-
         </td>
       </tr>
       @endforeach
@@ -104,13 +108,13 @@
       @csrf
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">CLAIMS AND REIMBURSEMENT INFO UPDATE</h5>
+          <h5 class="modal-title">UPDATE CLAIMS AND REIMBURSEMENT INFORMATION</h5>
         </div>
 
         <div class="modal-body">
-           <input type="hidden" name="claim_id_update"  id="claim_id_update" class="form-control">
-          <label>EMPLOYEE ID</label>
-          <div class="form-group">
+         <input type="hidden" name="claim_id_update"  id="claim_id_update" class="form-control">
+         <label>EMPLOYEE ID</label>
+         <div class="form-group">
            <input type="text" name="employee_id_update"  id="employee_id_update" class="form-control">
          </div>
          
@@ -142,10 +146,20 @@
            <input type="number" name="amount_update" id="amount_update" class="form-control">
          </div>
 
+         <label>STATUS</label>
+         <div class="form-group">
+          <select class="form-control" name="status_update" id="status_update">
+            <option>Pending</option>
+            <option>Approved</option>
+          </select>
+        </div>
 
-       </div>
-       <div class="modal-footer">
-        <button type="SUBMIT" class="btn btn-primary">Save changes</button>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="SUBMIT" class="btn btn-primary">Save</button>
         <button type="button" class="btn btn-danger" id="modal_close_update">Close</button>
       </div>
     </div>
@@ -160,13 +174,13 @@
 <div class="modal" tabindex="-1" role="dialog" id="smallModal">
   <div class="modal-dialog modal-lg" role="document">
 
-      <div class="modal-content">
-          <h5 style="text-align:center; margin-top:9%;">CLAIMS AND REIMBURSEMENT INFO</h5>
+    <div class="modal-content">
+      <h5 style="text-align:center; margin-top:9%;">CLAIMS AND REIMBURSEMENT INFORMATION</h5>
 
-  
-        <div class="modal-body">
-          
-  <?php
+
+      <div class="modal-body">
+
+        <?php
 $host="localhost"; // Host name 
 $username="root"; // Mysql username 
 $password=""; // Mysql password 
@@ -176,96 +190,96 @@ $conn = mysqli_connect("$host","$username","$password")or die("cannot connect");
 mysqli_select_db($conn,"$db_name")or die("cannot select DB");
 ?>
 
-    <div class="form-group">
-      <p>EMPLOYEE ID</p>
-      <input type="text" name="" id="#myInputs" placeholder="EMPLOYEE ID  OR EMPLOYEE NAME" class="form-control">
-  </div>
+<div class="form-group">
+  <p>EMPLOYEE ID</p>
+  <input type="text" name="" id="#myInputs" placeholder="EMPLOYEE ID  OR EMPLOYEE NAME" class="form-control">
+</div>
 
-  <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th>Employee ID</th>
-          <th>Employee Fullname</th>
-          <th>POSITION</th>
-          <th>DEPARTMENT</th>
-          <th>ACTION</th>
-      </tr>
-  </thead>
-  <?php 
-  $selet ="SELECT *,hr4_recruitment.department as  dep FROM `hr1_applicant_apply` INNER JOIN  hr1_applicant on  hr1_applicant.applicant_id=hr1_applicant_apply.applicant_id  INNER  JOIN  hr4_recruitment  on  hr4_recruitment.recruitment_id=hr1_applicant_apply.recruitment_id  where  hr1_applicant_apply.status='deploy'";
-  $query=mysqli_query($conn,$selet);
-  ?> 
-  <tbody>
-    <?php while($row=mysqli_fetch_assoc($query)){?>
-        <tr class="contentss">
-            <td class="titless"><?php echo  $row['applicant_id']?></td>
-            <td class="titless"><?php echo  $row['firstname']?> <?php echo  $row['lastname']?></td>
-            <td><?php echo $row['jobrole']?></td>
-            <td> <?php echo $row['dep']?></td>
-            <td><button class="btn btn-primary btn-sm  btn-flat" id="add">ADD</button></td>
-        </tr>
-    <?php }?>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+     <th>Employee ID</th>
+     <th>Employee Full Name</th>
+     <th>Position</th>
+     <th>Department</th>
+     <th>Action</th>
+   </tr>
+ </thead>
+ <?php 
+ $selet ="SELECT *,hr4_recruitment.department as  dep FROM `hr1_applicant_apply` INNER JOIN  hr1_applicant on  hr1_applicant.applicant_id=hr1_applicant_apply.applicant_id  INNER  JOIN  hr4_recruitment  on  hr4_recruitment.recruitment_id=hr1_applicant_apply.recruitment_id  where  hr1_applicant_apply.status='deploy'";
+ $query=mysqli_query($conn,$selet);
+ ?> 
+ <tbody>
+  <?php while($row=mysqli_fetch_assoc($query)){?>
+    <tr class="contentss">
+      <td class="titless"><?php echo  $row['applicant_id']?></td>
+      <td class="titless"><?php echo  $row['firstname']?> <?php echo  $row['lastname']?></td>
+      <td><?php echo $row['jobrole']?></td>
+      <td> <?php echo $row['dep']?></td>
+      <td><button class="btn btn-primary btn-sm  btn-flat" id="add">ADD</button></td>
+    </tr>
+  <?php }?>
 </tbody>
 </table>
 
 
-    <form  action="{{url('/claims')}}" id="formAuthentication" class="mb-3" method="POST">
-      @csrf
+<form  action="{{url('/claims')}}" id="formAuthentication" class="mb-3" method="POST">
+  @csrf
 
-          <div class="row" style="margin-top:5%;">
-            
+  <div class="row" style="margin-top:5%;">
 
-          <div class="form-group col-md-6">
-            <label>EMPLOYEE ID</label>
-           <input type="text" name="employee_ids"  id="employee_ids"  disabled class="form-control">
-             <input type="hidden" name="employee_id"  id="employee_id" class="form-control">
-         </div>
-       
-         <div class="form-group col-md-6">
-            <label>EMPLOYEE NAME</label>
-           <input type="text" name="employee_name"  id="employee_name" disabled class="form-control">
-         </div>
 
-      
-         <div class="form-group col-md-6">
-             <label>CLAIM DATE</label>
-           <input type="date" name="claim_date" class="form-control">
-         </div>
+    <div class="form-group col-md-6">
+      <label>EMPLOYEE ID</label>
+      <input type="text" name="employee_ids"  id="employee_ids"  disabled class="form-control">
+      <input type="hidden" name="employee_id"  id="employee_id" class="form-control">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>EMPLOYEE NAME</label>
+      <input type="text" name="employee_name"  id="employee_name" disabled class="form-control">
+    </div>
+
+
+    <div class="form-group col-md-6">
+     <label>CLAIM DATE</label>
+     <input type="date" name="claim_date" class="form-control">
+   </div>
 
 
    
-         <div class="form-group col-md-6">
-                <label>CLAIM TYPE</label>
-           <select name="employee_type" class="form-control">
-             <option class="form-control">Travel Expenses</option>
-             <option class="form-control">Transportation Allowance</option>
-             <option class="form-control">Meal Allowance</option>
-             <option class="form-control">Performance-based Bonus</option>
-             <option class="form-control">Health Insurance</option>
-             <option class="form-control">Leave Benefit</option>
-             <option class="form-control">13 month pay</option>
+   <div class="form-group col-md-6">
+    <label>CLAIM TYPE</label>
+    <select name="employee_type" class="form-control">
+     <option class="form-control">Travel Expenses</option>
+     <option class="form-control">Transportation Allowance</option>
+     <option class="form-control">Meal Allowance</option>
+     <option class="form-control">Performance-based Bonus</option>
+     <option class="form-control">Health Insurance</option>
+     <option class="form-control">Leave Benefit</option>
+     <option class="form-control">13 month pay</option>
 
-           </select>
+   </select>
 
-         </div>
-
-       
-         <div class="form-group col-md-6">
-            <label>AMOUNT</label>
-           <input type="number" name="amount" class="form-control">
-         </div>
-
-          </div>
+ </div>
 
 
-       <div class="modal-footer">
-        <button type="SUBMIT" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-danger" id="modal_close">Close</button>
-      </div>
+ <div class="form-group col-md-6">
+  <label>AMOUNT</label>
+  <input type="number" name="amount" class="form-control">
+</div>
+
+</div>
+
+
+<div class="modal-footer">
+  <button type="SUBMIT" class="btn btn-primary">Save</button>
+  <button type="button" class="btn btn-danger" id="modal_close">Close</button>
+</div>
 
 </form>
 
-    </div>
+</div>
 
 </div>
 </div>
@@ -291,24 +305,25 @@ mysqli_select_db($conn,"$db_name")or die("cannot select DB");
 <script >
   $(document).on('click', '#updateclick', function () {
     $('#updatemodal').modal('show');
-          $('form')[0].reset();
+    $('form')[0].reset();
     var tr = $(this).closest("tr").find('td');
     $('#employee_id_update').val(tr.eq(0).text());
     $('#employee_name_update').val(tr.eq(1).text());
     $('#claim_date_update').val(tr.eq(2).text());
     $('#employee_type_update').val(tr.eq(3).text());
-    $('#amount_update').val(tr.eq(4).text());
+    $('#amount_update').val(tr.eq(6).text());
     $('#claim_id_update').val(tr.eq(5).text());
+    $('#status_update').val(tr.eq(7).text());
   });
 
 
   $(document).on('click', '#add', function () {
-       $('form')[0].reset();
-       var tr = $(this).closest("tr").find('td');
-       $('#employee_id').val(tr.eq(0).text());
-        $('#employee_ids').val(tr.eq(0).text());
-       $('#employee_name').val(tr.eq(1).text());
-   });
+   $('form')[0].reset();
+   var tr = $(this).closest("tr").find('td');
+   $('#employee_id').val(tr.eq(0).text());
+   $('#employee_ids').val(tr.eq(0).text());
+   $('#employee_name').val(tr.eq(1).text());
+ });
 </script>
 
 
@@ -350,8 +365,8 @@ mysqli_select_db($conn,"$db_name")or die("cannot select DB");
       $('.contentss').hide();
 // Search 
       $('.contentss .titless:contains("'+text+'")').closest('.contentss').show();
+    });
   });
-});
 
 
 </script>

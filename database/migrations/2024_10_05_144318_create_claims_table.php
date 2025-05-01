@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('employee_id')->nullable();
             $table->date('claim_date')->nullable();
             $table->string('claim_type')->nullable();
+             $table->string('status')->nullable();
             $table->double('amount');
             $table->timestamps();
         });

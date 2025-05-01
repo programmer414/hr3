@@ -43,7 +43,7 @@
            <th>Employee name</th>
            <th>Time In</th>
            <th>Time out</th>
-           <th>Total Hours Work</th>
+           <th>Total Hours Worked</th>
            <th>Date</th>
          </tr>
        </thead>
@@ -60,7 +60,14 @@
             $datetime1 = new DateTime($claim->time_in);
             $datetime2 = new DateTime($claim->time_out);
             $interval = $datetime1->diff($datetime2);
-            echo $interval->format('%hh %im');
+            $gettime=$claim->time_out;
+
+          if(empty($gettime)){
+
+          }else{
+               echo $interval->format('%hh %im');
+          }
+          
             ?>
           </td>
           <td>{{$get=$claim->date_time_in}}</td>
@@ -76,6 +83,7 @@
           if($date!==$get){
             $totalhrs=$interval->format('%h');
             $over_time=$totalhrs-8;
+
             $update="update hr3_attendance set total_hrs='$totalhrs',over_time='$over_time' where attendance_id='$claim->attendance_id'";
             mysqli_query($conn,$update);
 
@@ -92,12 +100,7 @@
 
 
 <script type="text/javascript">
-
-
   setInterval(function() {
     location.reload();
 },9000); // refresh every 5 seconds
-
-
-
 </script>

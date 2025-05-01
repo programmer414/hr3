@@ -4,50 +4,52 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Leave;
+use DateTime;
+use DateTimeZone;
+
 class Leavecontroller extends Controller
 {
     
 
     public function store(Request $request){
         // dd($request->all());
+$date = new DateTime('now', new DateTimeZone('Asia/Manila'));
+  $Date=$date->format('Y-m-d h:i:s');
 
         Leave::create([
-            'employee_id' => $request->employee_id,
-            'employee_name' => $request->employee_name,
+            'employee_id' => $request->getsecondid,
              'leave_type' => $request->leave_type,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'status' => $request->status,
+            'status' =>'Pending',
+             'date_request'=>$Date,
         ]);
 
-        return back();
-    }
+         return back();
+     }
+
+
     
-public function Leaveupdate(Request $request){
-$id=$request->employee_id;
+public function Leaveupdate($id){
  $leave = Leave::where('id',$id)->first();
         if(!$leave){
-               return abort(404);
              }
         $leave->update([
-            'status' => $request->status,
+            'status' =>'Approved',
    
         ]);
     return back();
     }
 
     public function destroy($id){
-        $Leave=  Leave::find($id);
-
-        if(!$Leave){
-            return abort(404);
-        }
-
-
-        $Leave->delete();
-
-
-        return back();
+       $leave = Leave::where('id',$id)->first();
+        if(!$leave){
+             }
+        $leave->update([
+            'status' =>'Decline',
+   
+        ]);
+    return back();
     }
 
 

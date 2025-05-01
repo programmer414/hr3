@@ -149,7 +149,7 @@
           <label>USER ROLE</label>
    <div class="form-group">
    <select class="form-control" name="role">
-     <option>Admin</option>
+     <option>admin</option>
        <option>Hr Staff</option>
    </select>
    </div>
@@ -194,7 +194,7 @@
    <div class="form-group">
    <select class="form-control" name="roleupdate" id="roleupdate">
           <option>Hr Staff</option>
-     <option>Admin</option>
+     <option>admin</option>
  
    </select>
    </div>
@@ -277,6 +277,20 @@ $(document).ready(function(){
 
 </script>
 
+<script>
+  window.onload = function () {
+    var msg = '{{ Session::get('alert') }}';
+    var exist = '{{ Session::has('alert') }}';
 
+    if (exist) {
+      Swal.fire({
+        title: "Alert!",
+        text: msg,
+        icon: "info",
+        confirmButtonText: "OK"
+      });
+    }
+  };
+</script>
 
 

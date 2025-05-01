@@ -20,6 +20,7 @@ class ClaimController extends Controller
             'claim_date' => $request->claim_date,
             'claim_type' => $request->employee_type,
             'amount' => $request->amount,
+            'status' =>'Pending',
         ]);
 
         return back();
@@ -31,35 +32,31 @@ class ClaimController extends Controller
 
 
     // update | update
-    public function update(Request $request){
-        $id=$request->claim_id_update;
+    public function updated($id){
+      $claim = Claim::where('id',$id)->first();
+        if(!$claim){
+            return abort(404);
+        }
+
+        $claim->update([
+             'status'=>'Approved',
+
+        ]);
+
+        return back();
+    }
+
+    // destroy | delete
+    public function destroy($id){
         $claim = Claim::where('id',$id)->first();
         if(!$claim){
             return abort(404);
         }
 
         $claim->update([
-            'employee_id' => $request->employee_id_update,
-            'claim_date' => $request->claim_date_update,
-            'claim_type' => $request->employee_type_update,
-            'amount' => $request->amount_update,
+             'status'=>'Decline',
+
         ]);
-
-        return back();
-    }
-
-
-    // destroy | delete
-    public function destroy($id){
-        $claim = Claim::find($id);
-
-        if(!$claim){
-            return abort(404);
-        }
-
-
-        $claim->delete();
-
 
         return back();
     }
